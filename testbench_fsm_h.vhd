@@ -1,13 +1,13 @@
--- Testbench de FSM - Método Construção Direta
+-- Testbench de FSM - Método Hierárquico
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity testbench_fsm_d is
+entity testbench_fsm_h is
 end entity;
 
-architecture arch_testbench_fsm_d of testbench_fsm_d is   
+architecture arch_testbench_fsm_h of testbench_fsm_h is   
 
-component fsm_d is port(
+component fsm_h is port(
   i_CLR_n: in std_logic;   -- clear/reset
   i_CLK:   in std_logic;   -- clock
   i_a:     in std_logic;   -- input 
@@ -20,7 +20,7 @@ constant c_PERIOD: time := 1 ns;         -- Período constante para clock
 
 begin
 
-u_DUT: fsm_d port map(
+u_DUT: fsm_h port map(
   i_CLR_n => w_CLR_n,
   i_CLK =>   w_CLK,
   i_a =>     w_a,
