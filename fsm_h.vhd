@@ -10,28 +10,24 @@ entity fsm_h is port(
 end entity;
 
 architecture arch_fsm_h of fsm_h is
-  signal w_s, w_n: std_logic_vector(2 downto 0); -- estado atual e estado próximo
+  signal r_STATE, w_NEXT: std_logic_vector(2 downto 0); -- estado atual e estado próximo
 begin
-    
--- n0 = s2’s0’ * (s1’a + s1)
-w_n(0) <= (not w_s(2) and not w_s(0)) and ((not w_s(1) and i_a) or w_s(1));
-
--- n1  = s2’ * (s1 ^ s0)
-w_n(1) <= not w_s(2) and (w_s(1) xor w_s(0));
-
--- n2 = s2’s1s0
-w_n(2) <= not w_s(2) and w_s(1) and w_s(0);
-
--- r = s2’ * (s1 ^ s0) + s2s1’s0’
-o_r <= (not w_s(2) and (w_s(1) xor w_s(0))) or (w_s(2) and not w_s(1) and not w_s(0));
 
 -- Registrador de estados
 process(i_CLR_n, i_CLK)
 begin
   if (i_CLR_n = '0') then
-    w_s <= "000";
+    r_STATE <= "000";
   elsif (rising_edge(i_CLK)) then
-    w_s <= w_n;
+    r_STATE <= w_NEXT;
   end if;
 end process;
+
+-- Transição de estados
+w_NEXT(0) <= (not r_STATE(2) and not r_STATE(0)) and ((not r_STATE(1) and i_a) or r_STATE(1));
+w_NEXT(1) <= not r_STATE(2) and (r_STATE(1) xor r_STATE(0));
+w_NEXT(2) <= not r_STATE(2) and r_STATE(1) and r_STATE(0);
+
+-- Saída
+o_r <= (not r_STATE(2) and (r_STATE(1) xor r_STATE(0))) or (r_STATE(2) and not r_STATE(1) and not r_STATE(0));
 end architecture;
