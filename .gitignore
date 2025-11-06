@@ -1,4 +1,17 @@
+*.txt
+
+# Visual Studio Code
 .vs/
+
+# ModelSim
 work/
-*.wlf
 *.vstf
+*.wlf
+
+# Quartus Prime
+db/
+incremental_db/
+output_files/
+simulation/
+*.qpf
+*.qsf

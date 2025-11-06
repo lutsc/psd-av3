@@ -1,18 +1,16 @@
--- FSM - Método Hierárquico
+-- FSM - Método Hierárquico - Lógica Combinacional
 library ieee;
 use ieee.std_logic_1164.all;
 
 entity log_comb is port(
-  i_a:     in std_logic;   -- input 
-  i_s0:     in std_logic;   -- input 
-  i_s1:     in std_logic;   -- input 
-  i_s2:     in std_logic;   -- input 
-  
-  o_r:     out std_logic; -- output
-  o_n2:     out std_logic; -- output
-  o_n1:     out std_logic; -- output
-  o_n0:     out std_logic -- output
-  ); 
+  i_a  : in std_logic;   -- input 
+  i_s0 : in std_logic;   -- input 
+  i_s1 : in std_logic;   -- input 
+  i_s2 : in std_logic;   -- input 
+  o_r  : out std_logic;  -- output
+  o_n2 : out std_logic;  -- output
+  o_n1 : out std_logic;  -- output
+  o_n0 : out std_logic); -- output 
 end entity;
 
 architecture arch_log_comb of log_comb is 
